@@ -9,22 +9,20 @@ object WordCountExample {
   def main(args:Array[String]): Unit = {
 
     val spark:SparkSession = SparkSession.builder()
-      .master("local[3]")
       .appName("SparkByExamples.com")
       .getOrCreate()
 
     val sc = spark.sparkContext
 
-    val resourcesPath = getClass.getResource("/test.txt")
-    //val rdd:RDD[String] = sc.textFile("/resources/test.txt")
-    val rdd:RDD[String] = sc.textFile(resourcesPath.getPath)
+    //val rdd:RDD[String] = sc.textFile("src/main/resources/test.txt")
+    val rdd:RDD[String] = sc.textFile("file:///root/test.txt")
+
     println("initial partition count:"+rdd.getNumPartitions)
 
     val reparRdd = rdd.repartition(4)
     println("re-partition count:"+reparRdd.getNumPartitions)
 
     //rdd.coalesce(3)
-
     rdd.collect().foreach(println)
 
     // rdd flatMap transformation
@@ -77,7 +75,7 @@ object WordCountExample {
     })
 
     //Action - saveAsTextFile
-    rdd5.saveAsTextFile("wordCount_results.txt")
+    rdd5.saveAsTextFile("file:///root/wordCount_results.txt")
 
   }
 }
