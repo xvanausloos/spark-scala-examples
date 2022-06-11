@@ -15,7 +15,9 @@ object WordCountExample {
 
     val sc = spark.sparkContext
 
-    val rdd:RDD[String] = sc.textFile("src/main/resources/test.txt")
+    val resourcesPath = getClass.getResource("/test.txt")
+    //val rdd:RDD[String] = sc.textFile("/resources/test.txt")
+    val rdd:RDD[String] = sc.textFile(resourcesPath.getPath)
     println("initial partition count:"+rdd.getNumPartitions)
 
     val reparRdd = rdd.repartition(4)
@@ -75,7 +77,7 @@ object WordCountExample {
     })
 
     //Action - saveAsTextFile
-    rdd5.saveAsTextFile("c:/tmp/wordCount")
+    rdd5.saveAsTextFile("wordCount_results.txt")
 
   }
 }

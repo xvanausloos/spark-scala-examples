@@ -14,10 +14,12 @@ object CreateRDD {
     val rdd=spark.sparkContext.parallelize(Seq(("Java", 20000), ("Python", 100000), ("Scala", 3000)))
     rdd.foreach(println)
 
-    val rdd1 = spark.sparkContext.textFile("/path/textFile.txt")
+    val rdd1 = spark.sparkContext.textFile("src/main/resources/csv")
+    rdd1.collect().foreach(println)
 
-    val rdd2 = spark.sparkContext.wholeTextFiles("/path/textFile.txt")
-    rdd2.foreach(record=>println("FileName : "+record._1+", FileContents :"+record._2))
+
+    //val rdd2 = spark.sparkContext.wholeTextFiles("file:///c:/xaviertemp/testspark.txt")
+    //rdd2.foreach(record=>println("FileName : "+record._1+", FileContents :"+record._2))
 
     val rdd3 = rdd.map(row=>{(row._1,row._2+100)})
     rdd3.foreach(println)
@@ -25,7 +27,6 @@ object CreateRDD {
     val myRdd2 = spark.range(20).toDF().rdd
     myRdd2.foreach(println)
 
-
-
+    println("end success")
   }
 }
