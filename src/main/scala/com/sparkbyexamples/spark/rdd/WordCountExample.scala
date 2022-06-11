@@ -2,20 +2,26 @@ package com.sparkbyexamples.spark.rdd
 
 import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.SparkSession
+import org.apache.log4j.Logger
 
 object WordCountExample {
 
-
+  val logger = Logger.getLogger(this.getClass.getName)
   def main(args:Array[String]): Unit = {
+    logger.info("Logger : Welcome to log4j")
 
     val spark:SparkSession = SparkSession.builder()
+      .master("local[3]")
       .appName("SparkByExamples.com")
       .getOrCreate()
 
+
     val sc = spark.sparkContext
 
-    //val rdd:RDD[String] = sc.textFile("src/main/resources/test.txt")
-    val rdd:RDD[String] = sc.textFile("file:///root/test.txt")
+    val rdd:RDD[String] = sc.textFile("src/main/resources/test.txt")
+    //val rdd:RDD[String] = sc.textFile("file:///root/test.txt")
+    logger.debug("debug here...")
+    Thread.sleep(20000)
 
     println("initial partition count:"+rdd.getNumPartitions)
 
@@ -75,7 +81,10 @@ object WordCountExample {
     })
 
     //Action - saveAsTextFile
-    rdd5.saveAsTextFile("file:///root/wordCount_results.txt")
+//    rdd5.saveAsTextFile("file:///root/wordCount_results.txt")
+    rdd5.saveAsTextFile("wordCount_results.txt")
+
+
 
   }
 }
