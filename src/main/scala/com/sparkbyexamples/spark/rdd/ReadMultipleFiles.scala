@@ -14,7 +14,7 @@ object ReadMultipleFiles extends App {
     spark.sparkContext.setLogLevel("ERROR")
 
     println("read all text files from a directory to single RDD")
-    val rdd = spark.sparkContext.textFile("C:/tmp/files/*")
+    val rdd = spark.sparkContext.textFile("D:/projects/spark-scala-examples/src/main/resources/csv/invalid.txt/*")
     rdd.foreach(f=>{
       println(f)
     })

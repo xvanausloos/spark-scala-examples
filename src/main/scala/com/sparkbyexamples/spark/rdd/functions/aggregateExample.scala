@@ -6,13 +6,14 @@ object aggregateExample extends App {
 
   val spark = SparkSession.builder()
     .appName("SparkByExamples.com")
-    .master("local[3]")
+    .master("local[*]")
     .getOrCreate()
 
   spark.sparkContext.setLogLevel("ERROR")
-
+;
   //aggregate example
   val listRdd = spark.sparkContext.parallelize(List(1,2,3,4,5,3,2))
+  println("number of partitions of listRdd: " + listRdd.getNumPartitions)
   def param0= (accu:Int, v:Int) => accu + v
   def param1= (accu1:Int,accu2:Int) => accu1 + accu2
   println("output 1 : "+listRdd.aggregate(0)(param0,param1))
