@@ -1,10 +1,8 @@
 package com.sparkbyexamples.spark.rdd
 
+import org.apache.spark.sql.SparkSession
+
 object ReadMultipleFiles extends App {
-
-  import org.apache.spark.sql.SparkSession
-
-  object ReadMultipleFiles extends App {
 
     val spark:SparkSession = SparkSession.builder()
       .master("local[1]")
@@ -51,6 +49,4 @@ object ReadMultipleFiles extends App {
     rdd6.foreach(f => {
       println("Col1:"+f(0)+",Col2:"+f(1))
     })
-
-  }
 }
