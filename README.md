@@ -3,6 +3,10 @@
             <url>http://scala-tools.org/repo-releases</url>
 
             This repo is no more available.
+            
+
+Remove scala-tools.org from the repositories listed in the project (pom.xml, settings.xml,...), it is was down several ago (I'm its co-creator). scala-maven-plugin (I'm the owner) is available on maven central and jcenter.
+**********************************************************
 
 
 Explanation of all Spark SQL, RDD, DataFrame and Dataset examples present on this project are available at https://sparkbyexamples.com/ , All these examples are coded in Scala language and tested in our development environment.
